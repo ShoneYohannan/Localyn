@@ -1,0 +1,13 @@
+venv
+.venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache
+localyn.db
+.git
+.gitignore
+*.log
+.DS_Store
+Thumbs.db
