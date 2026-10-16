@@ -24,6 +24,7 @@ interface HeaderProps {
   onMarkNotificationRead: (id: string) => void;
   isSyncing?: boolean;
   onRefreshData?: () => void;
+  onOpenRankKit?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -34,7 +35,8 @@ export const Header: React.FC<HeaderProps> = ({
   notifications,
   onMarkNotificationRead,
   isSyncing = false,
-  onRefreshData
+  onRefreshData,
+  onOpenRankKit
 }) => {
   const [showBizDropdown, setShowBizDropdown] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
@@ -178,6 +180,17 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           )}
         </div>
+
+        {/* Rank on Google Action Button */}
+        {onOpenRankKit && (
+          <button
+            onClick={onOpenRankKit}
+            className="flex items-center space-x-1.5 px-3 py-1 rounded-xl bg-gradient-to-r from-orange-600 to-amber-500 hover:from-orange-500 hover:to-amber-400 text-white text-xs font-bold shadow-md shadow-orange-600/30 transition-all active:scale-95"
+          >
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Rank on Google</span>
+          </button>
+        )}
 
         {/* "4 Below" Pill Badge from screenshot */}
         <div className="flex items-center space-x-1 px-3 py-1 rounded-xl bg-[#121722] border border-[#1e2638] text-xs font-semibold text-cyan-400">

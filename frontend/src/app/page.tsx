@@ -11,6 +11,7 @@ import { ReviewsView } from "@/components/ReviewsView";
 import { AutomationsView } from "@/components/AutomationsView";
 import { IntegrationsView } from "@/components/IntegrationsView";
 import { OnboardingModal } from "@/components/OnboardingModal";
+import { GoogleRankKitModal } from "@/components/GoogleRankKitModal";
 import { api } from "@/lib/api";
 import { 
   Business, 
@@ -42,6 +43,7 @@ export default function Home() {
   const [isAuditing, setIsAuditing] = useState(false);
   const [isDiscovering, setIsDiscovering] = useState(false);
   const [isOnboardingOpen, setIsOnboardingOpen] = useState(false);
+  const [isRankKitOpen, setIsRankKitOpen] = useState(false);
 
   // Load business-specific data
   const loadBusinessData = useCallback(async (businessId: string) => {
@@ -220,6 +222,7 @@ export default function Home() {
         onMarkNotificationRead={handleMarkNotificationRead}
         isSyncing={isSyncing}
         onRefreshData={() => selectedBusiness && loadBusinessData(selectedBusiness.id)}
+        onOpenRankKit={() => setIsRankKitOpen(true)}
       />
 
       {/* Main Container */}
@@ -321,6 +324,15 @@ export default function Home() {
         onClose={() => setIsOnboardingOpen(false)}
         onSubmit={handleCreateBusiness}
       />
+
+      {/* Google Ranking Booster Modal */}
+      {selectedBusiness && (
+        <GoogleRankKitModal
+          isOpen={isRankKitOpen}
+          onClose={() => setIsRankKitOpen(false)}
+          business={selectedBusiness}
+        />
+      )}
     </div>
   );
 }
